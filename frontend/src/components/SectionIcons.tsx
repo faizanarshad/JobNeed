@@ -58,3 +58,12 @@ export const SpeakingIcon = () => (
     <path d="M12 18v4M9 22h6" />
   </Svg>
 );
+
+export const TeamIcon = () => (
+  <Svg>
+    <circle cx="9" cy="7" r="3.2" />
+    <path d="M2.5 20v-1.5A4.5 4.5 0 0 1 7 14h4a4.5 4.5 0 0 1 4.5 4.5V20" />
+    <circle cx="17" cy="8" r="2.6" />
+    <path d="M16 14.2a4.2 4.2 0 0 1 5.5 4V20" />
+  </Svg>
+);

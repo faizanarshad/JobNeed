@@ -4,13 +4,16 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useDarkMode } from "../hooks/useDarkMode";
+import { BackToTop } from "./BackToTop";
 import { Footer } from "./Footer";
+import { HeroQuickSearch } from "./HeroQuickSearch";
 import { Logo } from "./Logo";
 import { Marquee } from "./Marquee";
 import { MotivationScene3D } from "./MotivationScene3D";
 
 const NAV_SECTIONS = [
   { id: "home", label: "Home" },
+  { id: "about", label: "About" },
   { id: "search", label: "Search" },
   { id: "assistant", label: "Assistant" },
   { id: "tracker", label: "Tracker" },
@@ -138,8 +141,10 @@ export function Layout({ children }: { children: ReactNode }) {
           </span>
         </div>
       </div>
+      <HeroQuickSearch />
       <main className="relative mx-auto w-full max-w-7xl flex-1 px-4 py-8">{children}</main>
       <Footer />
+      <BackToTop />
     </div>
   );
 }

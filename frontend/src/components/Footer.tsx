@@ -1,6 +1,7 @@
 import { Logo } from "./Logo";
 
 const FEATURE_LINKS = [
+  { to: "#about", label: "About" },
   { to: "#search", label: "Job Search" },
   { to: "#assistant", label: "AI Assistant" },
   { to: "#cv", label: "CV Builder" },

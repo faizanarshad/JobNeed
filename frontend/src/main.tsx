@@ -5,6 +5,7 @@ import App from "./App";
 import { AuthProvider } from "./context/AuthContext";
 import { JobModalProvider } from "./context/JobModalContext";
 import { SavedJobsProvider } from "./context/SavedJobsContext";
+import { SearchIntentProvider } from "./context/SearchIntentContext";
 import { ToastProvider } from "./context/ToastContext";
 import "./index.css";
 
@@ -15,7 +16,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <ToastProvider>
           <SavedJobsProvider>
             <JobModalProvider>
-              <App />
+              <SearchIntentProvider>
+                <App />
+              </SearchIntentProvider>
             </JobModalProvider>
           </SavedJobsProvider>
         </ToastProvider>

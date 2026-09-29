@@ -1,4 +1,4 @@
-export type Accent = "sky" | "emerald" | "violet" | "amber" | "rose" | "cyan" | "fuchsia";
+export type Accent = "sky" | "emerald" | "violet" | "amber" | "rose" | "cyan" | "fuchsia" | "indigo";
 
 /**
  * One accent per one-page section (Home, Search, Assistant, Tracker, CV,
@@ -83,5 +83,14 @@ export const ACCENTS: Record<
     glow: "bg-fuchsia-400",
     tint: "bg-fuchsia-50/60 dark:bg-fuchsia-500/[0.04]",
     border: "border-fuchsia-100 dark:border-fuchsia-500/10",
+  },
+  indigo: {
+    text: "text-indigo-600 dark:text-indigo-400",
+    badge: "bg-indigo-100 text-indigo-700 dark:bg-indigo-500/20 dark:text-indigo-300",
+    gradient: "from-indigo-600 to-violet-600",
+    ring: "focus:ring-indigo-500/40",
+    glow: "bg-indigo-400",
+    tint: "bg-indigo-50/60 dark:bg-indigo-500/[0.04]",
+    border: "border-indigo-100 dark:border-indigo-500/10",
   },
 };

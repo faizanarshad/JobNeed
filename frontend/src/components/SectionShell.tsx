@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import type { ReactNode } from "react";
 import { ACCENTS, Accent } from "../lib/theme";
 
@@ -14,7 +15,17 @@ export function SectionShell({ id, accent, children }: { id: string; accent: Acc
       {/* isolate/relative + border/tint live here, but NOT overflow-hidden -
           that would clip any descendant using position:sticky (the CV
           preview) or break a print target's position:fixed escape. */}
-      <div className={`relative isolate rounded-3xl border ${theme.border} ${theme.tint} p-5 sm:p-10`}>
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.5 }}
+        className={`relative isolate rounded-3xl border ${theme.border} ${theme.tint} p-5 sm:p-10`}
+      >
+        {/* Opacity-only: a transform here (e.g. animating y) would create a
+            containing block for position:fixed descendants and break the
+            print target's fixed-position escape, the same class of bug the
+            old overflow-hidden placement caused for position:sticky. */}
         {/* A separate absolutely-positioned layer clips just the blobs to
             the rounded corners, without wrapping the real content. */}
         <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden rounded-3xl">
@@ -22,7 +33,7 @@ export function SectionShell({ id, accent, children }: { id: string; accent: Acc
           <div className={`absolute -right-16 -bottom-20 h-64 w-64 rounded-full ${theme.glow} opacity-[0.08] blur-3xl dark:opacity-[0.12]`} />
         </div>
         {children}
-      </div>
+      </motion.div>
     </section>
   );
 }

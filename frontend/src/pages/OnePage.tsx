@@ -5,6 +5,7 @@ import { useJobModal } from "../context/JobModalContext";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { scrollToId } from "../lib/scroll";
 import { About } from "./About";
+import { AboutSection } from "./AboutSection";
 import { Assistant } from "./Assistant";
 import { CVBuilder } from "./CVBuilder";
 import { Home } from "./Home";
@@ -26,6 +27,10 @@ export function OnePage() {
     <div className="space-y-14 sm:space-y-20">
       <SectionShell id="home" accent="sky">
         <About />
+      </SectionShell>
+
+      <SectionShell id="about" accent="indigo">
+        <AboutSection />
       </SectionShell>
 
       <SectionShell id="search" accent="emerald">

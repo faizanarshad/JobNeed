@@ -4,12 +4,16 @@ export function SearchBar({
   onSearch,
   placeholder = "e.g. remote React contract under 3 months",
   submitLabel = "Search",
+  initialValue,
 }: {
   onSearch: (query: string) => void;
   placeholder?: string;
   submitLabel?: string;
+  /** Seeds the field once on mount - pair with a `key` that changes when the
+   * caller wants to push a new value in, since this only reads on mount. */
+  initialValue?: string;
 }) {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState(initialValue ?? "");
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();

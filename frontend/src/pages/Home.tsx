@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { getGithubStats, getMyCV, search, SearchResult } from "../api/client";
 import { EmptyState } from "../components/EmptyState";
 import { JobCard } from "../components/JobCard";
@@ -12,6 +12,7 @@ import { SearchIcon } from "../components/SectionIcons";
 import { SourceFilter } from "../components/SourceFilter";
 import { useAuth } from "../context/AuthContext";
 import { useSavedJobs } from "../context/SavedJobsContext";
+import { useSearchIntent } from "../context/SearchIntentContext";
 
 const FEATURE_LINKS = [
   {
@@ -62,6 +63,9 @@ export function Home() {
   const [profileKeywords, setProfileKeywords] = useState<string[]>([]);
   const [loadingProfile, setLoadingProfile] = useState(false);
 
+  const { heroQuery } = useSearchIntent();
+  const lastHandledHeroQuery = useRef<string | null>(null);
+
   useEffect(() => {
     if (!personalize || !user) return;
     let cancelled = false;
@@ -107,6 +111,13 @@ export function Home() {
     }
   }
 
+  useEffect(() => {
+    if (heroQuery && heroQuery !== lastHandledHeroQuery.current) {
+      lastHandledHeroQuery.current = heroQuery;
+      handleSearch(heroQuery);
+    }
+  }, [heroQuery]);
+
   const sources = useMemo(
     () => Array.from(new Set([...KNOWN_SOURCES, ...results.map((r) => r.job.source)])),
     [results]
@@ -146,7 +157,7 @@ export function Home() {
         </div>
       </div>
 
-      <SearchBar onSearch={handleSearch} />
+      <SearchBar key={heroQuery ?? "default"} initialValue={heroQuery ?? undefined} onSearch={handleSearch} />
 
       {user && (
         <label className="flex w-fit cursor-pointer items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
